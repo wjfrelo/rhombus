@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sequential-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: job-1
+        image: centos
+        # runs for 15 seconds; echoes "bye-bye world"
+        command: ['sh', '-c', 'for i in 1 2 3; do echo "bye bye world" && sleep 5s; done;']
+      - name: job-2
+        image:  centos
+        # runs for 15 seconds; echoes "hello world"
+        command: ['sh', '-c', 'for i in 1 2 3; do echo "hello world" && sleep 5s; done;']
+      # I don't really need the 'containers', but syntax requires
+      # it so, I'm using it as a place where I can report the
+      # completion status
+      restartPolicy: Never
+
