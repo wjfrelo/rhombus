@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rhombus-interview
+  labels:
+    app: rhombus-interview
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rhombus-interview
+  template:
+    metadata:
+      labels:
+        app: rhombus-interview
+    spec:
+      containers:
+      - name: rhombus-hello
+        image: rhombus-hello
+        imagePullPolicy: Never
+
+      - name: rhombus-bye
+        image: rhombus-bye
+        imagePullPolicy: Never
